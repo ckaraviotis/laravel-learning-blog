@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PagesController@getIndex');
+Route::get('/about', 'PagesController@getAbout');
+Route::get('/contact', 'PagesController@getContact');
+Route::resource('/posts', 'PostController');
+Route::get('/blog/{slug}', ['as' => 'blog.show', 'uses' => 'BlogController@show'])->where('slug', '[\w\d\-\_]+');
+Route::get('/blog', ['as' => 'blog.index', 'uses' => 'BlogController@index']);
